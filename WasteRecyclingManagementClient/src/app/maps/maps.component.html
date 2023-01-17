@@ -1,0 +1,44 @@
+<agm-map [latitude]="centerLatitude" [longitude]="centerLongitude" [zoom]="zoom" (zoomChange)="changeMapZoom($event)" (mapRightClick)="onClickOnMap($event)">
+    
+    <agm-marker *ngIf="role=='admin' && isNewRecyclingPointOn" [latitude]="newRecyclingPointLatitude" [longitude]="newRecyclingPointLongitude">
+        <agm-info-window [isOpen]="isNewRecyclingPointOn" (infoWindowClose)="onRecyclingPointCancel()">
+            <mat-card>
+                <mat-card-title-group>
+                  <mat-card-title>Add new recycling point</mat-card-title>
+                  <mat-card-subtitle>latitude: {{newRecyclingPointLatitude}}</mat-card-subtitle>
+                  <mat-card-subtitle>longitude: {{newRecyclingPointLongitude}}</mat-card-subtitle>
+                  <img mat-card-md-image src="assets\images\recycle.png" >
+                </mat-card-title-group>
+
+                <mat-form-field appearance="fill">
+                    <mat-label style="color:goldenrod">New Recycling Point Name</mat-label>
+                    <input [(ngModel)]="newRecyclingPointName" matInput placeholder="Enter name ...">
+                </mat-form-field>
+                <br>
+
+                <div *ngIf="newRecyclingPointError" class="warning-message">
+                    <mat-icon color="warn">warning</mat-icon>
+                    <p>{{newRecyclingPointErrorMessage}}</p>
+                </div>
+
+                <button mat-raised-button color="accent" (click)="onRecyclingPointAdd()" >Add</button>
+                <button style="margin-left: 60px;" mat-raised-button color="accent" (click)="onRecyclingPointCancel()" >Cancel</button>
+            </mat-card>
+        </agm-info-window>
+    </agm-marker>
+
+    <agm-marker *ngFor="let point of recyclingPoints" [latitude]="point.latitude" [longitude]="point.longitude">
+        <agm-info-window (infoWindowClose)="onRecyclingPointClose()" >
+            <mat-card>
+                <mat-card-title-group>
+                  <mat-card-title>{{point.name}}</mat-card-title>
+                  <mat-card-subtitle>location id: {{point.id}}</mat-card-subtitle>
+                  <img mat-card-md-image src="assets\images\recycle.png" >
+                </mat-card-title-group>
+                <button mat-raised-button color="accent" (click)="onLocationClick(point)" >View Details</button>
+            </mat-card>
+        </agm-info-window>
+    </agm-marker>
+
+
+</agm-map>

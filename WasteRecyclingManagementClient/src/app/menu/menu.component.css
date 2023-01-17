@@ -1,0 +1,14 @@
+.menuInterior {
+    display: flexbox;
+    align-items: center;
+    justify-content: center;
+}
+
+.menuInterior p{
+    padding: 10px;
+}
+
+.menuInterior button {
+    width: fit-content;
+    margin-left: 50px;
+}

@@ -1,0 +1,3 @@
+<app-login (authSwitchClick)="toggleAuth($event)" (loginSuccess)="loginSuccess($event)" [registeredUsername]="registeredUsername" *ngIf="loginForm"></app-login>
+
+<app-register (authSwitchClick)="toggleAuth($event)" (onRegisterSuccess)="registerSuccess($event)" *ngIf="!loginForm"></app-register>

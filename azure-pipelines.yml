@@ -1,0 +1,93 @@
+trigger:
+- main
+
+variables: 
+  apiProjectDir: 'WasteRecyclingManagementApi/WasteRecyclingManagementApi'
+  apiProjectDirUnitTests: 'WasteRecyclingManagementApi/WasteRecyclingManagementApi.UnitTests'
+  apiProjectDirIntegrationTests: 'WasteRecyclingManagementApi/WasteRecyclingManagementApi.IntegrationTests'
+  identityServerProjectDir: 'WasteRecyclingManagementApi/IdentityServerApi'
+  angularProjectDir: 'WasteRecyclingManagementClient'
+  
+
+pool: agent_pool_2
+  # vmImage: ubuntu-latest
+
+stages:
+- stage: build
+  jobs:
+    - job: build
+      steps:
+      # - script: pwd
+      #   displayName: 'Show directory name'
+
+      - script: dir
+        displayName: 'Show local files'
+
+      - script: docker --version
+        displayName: 'Check Docker version'
+        workingDirectory: $(apiProjectDir)
+
+      - script: dotnet build
+        displayName: 'Build Api'
+        workingDirectory: $(apiProjectDir)
+
+      - task: DotNetCoreCLI@2
+        displayName: 'Run Unit Tests'
+        inputs:
+          command: test
+          workingDirectory: '$(apiProjectDirUnitTests)'
+
+      - script: docker run --name sqlserver -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=ceAmAiF@a1naParola" -p 1433:1433 -e "MSSQL_PID=Standard" -d mcr.microsoft.com/mssql/server:2019-latest
+        displayName: 'Start SQL Server Container'
+
+      - script: docker logs sqlserver
+        displayName: 'Show logs for docker container'
+
+      - script: docker ps
+        displayName: 'Show running docker processes'
+      
+      - script: docker ps -a
+        displayName: 'Show all docker processes'
+
+      # - script: dotnet tool install --global dotnet-ef
+      #   displayName: 'Install EF Core'
+      #   workingDirectory:  'WasteRecyclingManagementApi'
+
+      - script: dotnet ef database update -s ../WasteRecyclingManagementApi/WasteRecyclingManagementApi.csproj
+        displayName: 'Apply migrations to database'
+        workingDirectory: 'WasteRecyclingManagementApi/WasteRecyclingManagementApi.Data'
+
+      - script: sqlcmd -S localhost,1433 -U SA -P ceAmAiF@a1naParola -i ./database_init.sql
+        displayName: 'Populate database with test data'
+
+      - task: DotNetCoreCLI@2
+        displayName: 'Run Integration Tests'
+        inputs:
+          command: test
+          workingDirectory: '$(apiProjectDirIntegrationTests)'
+      
+      - script: docker stop sqlserver
+        displayName: 'Stop SQL Server Container'
+
+      - script: docker rm sqlserver
+        displayName: 'Delete SQL Server Container'
+
+      - script: dotnet publish -o $(build.artifactStagingDirectory)
+        displayName: 'Publish Api'
+        workingDirectory: $(apiProjectDir)
+
+      - script: dotnet build
+        displayName: 'Build IdentityServer'
+        workingDirectory: $(identityServerProjectDir)
+
+      # - task: PublishPipelineArtifact@1
+      #   inputs:
+      #     targetPath: '$(build.artifactStagingDirectory)'
+      #     artifact: 'drop'
+      #     publishLocation: 'pipeline'
+
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          ArtifactName: 'drop'
+          publishLocation: 'Container'

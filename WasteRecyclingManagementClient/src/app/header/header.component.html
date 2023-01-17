@@ -1,0 +1,43 @@
+<mat-toolbar color="primary" class="header">
+    
+    <span style="margin-left: 10px;">
+        <button mat-mini-fab color="accent" aria-label="Example icon button with a menu icon" (click)="openSideMenu()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </span>
+
+    <span class="headerContent">{{title}}</span>
+
+    <span style="margin-right: auto; margin-left: auto;">
+        <form>
+              
+            <mat-form-field appearance="standard" style="margin-bottom:15px; width: 300px;" >
+                <input [(ngModel)]="selectedRecyclingPointSearch" type="search" matInput placeholder="Search..." required [formControl]="myControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      {{option.name}}
+                    </mat-option>
+                  </mat-autocomplete>
+                <button (click)="onLocationSearchClick()" mat-mini-fab color="accent" >
+                    <mat-icon>search</mat-icon>
+                </button>
+            </mat-form-field>
+        </form>
+    </span>
+
+    <span style="margin-right: 25px; margin-left: auto;">
+        <button mat-raised-button color="accent" *ngIf="!isLogged" (click)="openLoginForm()">
+            Login/Register
+        </button>
+
+        <span *ngIf="isLogged">
+            <span style="margin-right:10px">
+                Logged in as: <strong>{{username}}</strong>
+            </span>
+            <button (click)="logoutUser()" mat-raised-button color="accent">
+                Logout
+            </button>
+        </span>
+    </span>
+
+</mat-toolbar>

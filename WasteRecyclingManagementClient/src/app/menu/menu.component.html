@@ -1,0 +1,87 @@
+
+<div *ngIf="isLogged && recyclingPoint">
+  
+  <mat-card>
+    <mat-card-title-group>
+      <mat-card-title>{{recyclingPoint.name}}</mat-card-title>
+      <mat-card-subtitle>
+        <p>location id: {{recyclingPoint.id}}</p>
+        <!-- <p>latitude: {{recyclingPoint.latitude}}</p>
+        <p>longitude: {{recyclingPoint.longitude}}</p> -->
+        </mat-card-subtitle>
+      <img mat-card-md-image src="assets\images\recycle.png" >
+    </mat-card-title-group>
+
+    <mat-card-content>
+
+      <button mat-raised-button color="accent" (click)="deleteRecyclingPoint()" *ngIf="role=='admin'" style="margin-top:10px; margin-bottom:20px">Delete Recycling Point</button>
+      
+      <h3 *ngIf="role=='users'">Register waste:</h3>
+      <h3 *ngIf="role=='employees'">Clean container:</h3>
+      <h3 *ngIf="role=='admin'">Available containers:</h3>
+
+      <mat-form-field style="color:goldenrod" appearance="fill">
+        <mat-label style="color:goldenrod">Waste Type</mat-label>
+        <mat-select [(ngModel)]="selectedWasteType" [formControl]="wasteTypeControl" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let waste of wasteTypes" [value]="waste">
+            {{waste.type}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="wasteTypeControl.hasError('required')">Please choose a type of waste!</mat-error>
+      </mat-form-field>
+  
+      <br>
+
+      <mat-form-field appearance="fill" *ngIf="role=='users'">
+        <input type="number" [(ngModel)]="selectedAmount" matInput placeholder="Waste amount...">
+        <mat-hint align="start">min: 0.1</mat-hint>
+        <mat-hint align="end"> max: {{wasteTypeControl.value?.free}}</mat-hint>
+      </mat-form-field>
+      <span *ngIf="role=='users'">
+        {{wasteTypeControl.value?.unit}}
+      </span>
+
+      <div style="margin-top: 5px;">
+        Occupied: {{wasteTypeControl.value?.occupied}} {{wasteTypeControl.value?.unit}}
+      </div>
+
+      
+      <h3 *ngIf="role=='admin'" style="margin-top:50px; margin-bottom:5px;">Add container:</h3>
+      <br>
+      <mat-form-field *ngIf="role=='admin'" appearance="fill">
+        <mat-label style="color:goldenrod">Container waste type</mat-label>
+        <input [(ngModel)]="newContainerType" matInput placeholder="Ex: Glass, Plastic, Paper ...">
+      </mat-form-field>
+      <br>
+      <mat-form-field *ngIf="role=='admin'" appearance="fill">
+        <mat-label style="color:goldenrod">Waste measure unit</mat-label>
+        <input [(ngModel)]="newContainerMeasureUnit" matInput placeholder="Ex: kg, l ...">
+      </mat-form-field>
+      <br>
+      <mat-form-field *ngIf="role=='admin'" appearance="fill">
+        <input type="number" [(ngModel)]="newContainerCapacity" matInput placeholder="Container capacity ...">
+        <mat-hint align="start">min: 0.1</mat-hint>
+        <mat-hint align="end"> max: 1000</mat-hint>
+      </mat-form-field>
+      <br>
+      
+      <button (click)="addContainer()" style="margin-top:5px" mat-raised-button color="accent" *ngIf="role=='admin'">
+        Add New Container
+      </button>
+      
+      <button (click)="makeOperation()" style="margin-top:5px" mat-raised-button color="accent" *ngIf="isLogged && (role=='users' || role=='employees')">
+        Submit
+      </button>
+
+      <div *ngIf="operationError" style="margin-top: 5px; color: red">
+        <mat-icon color="warn">warning</mat-icon>
+        <p>
+          {{operationErrorMessage}}
+        </p>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+
+</div>

@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WasteRecyclingManagementApi", "WasteRecyclingManagementApi\WasteRecyclingManagementApi.csproj", "{AFA81CEB-8660-4217-8037-77CBFBA8BC77}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WasteRecyclingManagementApi.Core", "WasteRecyclingManagementApi.Core\WasteRecyclingManagementApi.Core.csproj", "{13352BDA-EC00-461B-B547-02665F7ED194}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WasteRecyclingManagementApi.Data", "WasteRecyclingManagementApi.Data\WasteRecyclingManagementApi.Data.csproj", "{5383AEE2-2F61-4F27-9891-ABDABAC802A4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServerApi", "IdentityServerApi\IdentityServerApi.csproj", "{0817F6CF-9EE9-4D60-A529-22D52760DAFA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WasteRecyclingManagementApi.IntegrationTests", "WasteRecyclingManagementApi.IntegrationTests\WasteRecyclingManagementApi.IntegrationTests.csproj", "{9C1EFEA8-A2FF-4DC6-BEF0-64213CCE0973}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WasteRecyclingManagementApi.UnitTests", "WasteRecyclingManagementApi.UnitTests\WasteRecyclingManagementApi.UnitTests.csproj", "{4AC905FA-4C74-4406-9312-6FA8433ED44B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFA81CEB-8660-4217-8037-77CBFBA8BC77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFA81CEB-8660-4217-8037-77CBFBA8BC77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFA81CEB-8660-4217-8037-77CBFBA8BC77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFA81CEB-8660-4217-8037-77CBFBA8BC77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13352BDA-EC00-461B-B547-02665F7ED194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13352BDA-EC00-461B-B547-02665F7ED194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13352BDA-EC00-461B-B547-02665F7ED194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13352BDA-EC00-461B-B547-02665F7ED194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5383AEE2-2F61-4F27-9891-ABDABAC802A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5383AEE2-2F61-4F27-9891-ABDABAC802A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5383AEE2-2F61-4F27-9891-ABDABAC802A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5383AEE2-2F61-4F27-9891-ABDABAC802A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0817F6CF-9EE9-4D60-A529-22D52760DAFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0817F6CF-9EE9-4D60-A529-22D52760DAFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0817F6CF-9EE9-4D60-A529-22D52760DAFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0817F6CF-9EE9-4D60-A529-22D52760DAFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C1EFEA8-A2FF-4DC6-BEF0-64213CCE0973}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C1EFEA8-A2FF-4DC6-BEF0-64213CCE0973}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C1EFEA8-A2FF-4DC6-BEF0-64213CCE0973}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C1EFEA8-A2FF-4DC6-BEF0-64213CCE0973}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AC905FA-4C74-4406-9312-6FA8433ED44B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AC905FA-4C74-4406-9312-6FA8433ED44B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AC905FA-4C74-4406-9312-6FA8433ED44B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AC905FA-4C74-4406-9312-6FA8433ED44B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C66A8859-CC51-4319-AE95-76DFDA5F90D1}
+	EndGlobalSection
+EndGlobal

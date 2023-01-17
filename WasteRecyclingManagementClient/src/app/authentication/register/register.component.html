@@ -1,0 +1,67 @@
+<div class="container">
+
+    <div>
+        <h3>Register for an account!</h3>
+    </div>
+
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label style="color:goldenrod" >Enter username</mat-label>
+            <input (change)="onUsernameChange($event)" matInput type="text">
+        </mat-form-field>
+    </div>
+    
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label style="color:goldenrod" >Enter password</mat-label>
+            <input (change)="onPasswordChange($event)" matInput [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label style="color:goldenrod" >Repeat password</mat-label>
+            <input (change)="onPasswordRepeatChange($event)" matInput [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="usernameWarning" class="warning-message">
+        <mat-icon color="warn">warning</mat-icon>
+        <p>Username should not contain spaces and have at least 4 characters!</p>
+    </div>
+
+    <div *ngIf="passwordWarning" class="warning-message">
+        <mat-icon color="warn">warning</mat-icon>
+        <p>Password should be at least 4 characters long!</p>
+    </div>
+
+    <div *ngIf="passwordRepeatWarning" class="warning-message">
+        <mat-icon color="warn">warning</mat-icon>
+        <p>Passwords do not match!</p>
+    </div>
+
+    <div *ngIf="serverError" class="warning-message">
+        <mat-icon color="warn">warning</mat-icon>
+        <p>{{errorMessage}}</p>
+    </div>
+
+    <div>
+        <button mat-raised-button color="accent" (click)="onRegisterUser()">
+            Register
+        </button>
+    </div>
+
+    <div>
+        Already have an account?
+        <button mat-button color="accent" (click)="openLoginForm()">
+            Login
+        </button>
+    </div>
+
+</div>

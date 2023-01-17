@@ -1,0 +1,44 @@
+
+<div>
+    <app-header 
+      (searchClicked)="openDrawer($event)" 
+      (menuClicked)="toggleDrawer()" 
+      (loginClicked)="openLoginForm()" 
+      (logoutClicked)="onLogoutUser()" 
+      [isLogged]="isLogged" 
+      [username]="username">
+  </app-header>
+</div>
+
+<div>
+  <mat-drawer-container autosize>
+      <mat-drawer #drawer mode="side" [(opened)]="drawerOpened">
+        
+        <div class="sideMenu">
+          <app-menu 
+            (onOperationSuccess)="closeDrawer()" 
+            [role]="role" 
+            [isLogged]="isLogged" 
+            [recyclingPoint]="selectedRecyclingPoint" 
+            [recyclingPointChange]="changeRecyclingPointSubject.asObservable()" 
+            *ngIf="isLogged">
+          </app-menu>
+
+          <app-authentication (onLoginSuccess)="onLoginSuccess($event)" *ngIf="!isLogged"></app-authentication>
+
+        </div>
+  
+      </mat-drawer>
+    
+      <div>
+  
+        <app-maps 
+          [role]="role"
+          [recyclingPointSearched]="changeRecyclingPointSubject.asObservable()"
+          (onRecyclingPointCardClose)="closeDrawer()" 
+          (locationClick)="openDrawer($event)">
+        </app-maps>
+  
+      </div>
+  </mat-drawer-container>  
+</div>
